@@ -28,3 +28,7 @@ def damage_percentage(path):
     total_pixels = mask.size
     damage_percentage = num_damaged_pixels / total_pixels * 100
     return damage_percentage
+
+path ="sen12flood\\sen12floods_s1_source\\sen12floods_s1_source\\sen12floods_s1_source_0_2019_03_20\\"
+k=damage_percentage(path)
+print(k)
