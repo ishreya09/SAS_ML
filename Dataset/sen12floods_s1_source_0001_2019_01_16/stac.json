@@ -1,0 +1,80 @@
+{
+    "assets": {
+        "VH": {
+            "href": "VH.tif",
+            "sar:polarizations": [
+                "VH"
+            ],
+            "title": "VH",
+            "type": "image/tiff; application=geotiff"
+        },
+        "VV": {
+            "href": "VV.tif",
+            "sar:polarizations": [
+                "VV"
+            ],
+            "title": "VV",
+            "type": "image/tiff; application=geotiff"
+        }
+    },
+    "bbox": [
+        -13.278254,
+        8.447033,
+        -13.231551,
+        8.493532
+    ],
+    "collection": "sen12floods_s1_source",
+    "geometry": {
+        "coordinates": [
+            [
+                [
+                    -13.278048,
+                    8.493532
+                ],
+                [
+                    -13.278254,
+                    8.447241
+                ],
+                [
+                    -13.231762,
+                    8.447033
+                ],
+                [
+                    -13.231551,
+                    8.493323
+                ],
+                [
+                    -13.278048,
+                    8.493532
+                ]
+            ]
+        ],
+        "type": "Polygon"
+    },
+    "id": "sen12floods_s1_source_0001_2019_01_16",
+    "links": [
+        {
+            "href": "../collection.json",
+            "rel": "collection"
+        },
+        {
+            "href": "../collection.json",
+            "rel": "parent"
+        }
+    ],
+    "properties": {
+        "datetime": "2019-01-16T00:00:00+0000",
+        "sar:frequency_band": "C",
+        "sar:instrument_mode": "EW",
+        "sar:polarizations": [
+            "VV",
+            "VH"
+        ],
+        "sar:product_type": "GRD"
+    },
+    "stac_extensions": [
+        "sar"
+    ],
+    "stac_version": "1.0.0-beta.2",
+    "type": "Feature"
+}

@@ -1,0 +1,94 @@
+{
+    "assets": {
+        "documentation": {
+            "href": "../_common/documentation.pdf",
+            "type": "application/pdf"
+        },
+        "labels": {
+            "href": "labels.geojson",
+            "title": "Flooding Labels",
+            "type": "application/geo+json"
+        }
+    },
+    "bbox": [
+        -13.278254,
+        8.447033,
+        -13.231551,
+        8.493532
+    ],
+    "collection": "sen12floods_s1_labels",
+    "geometry": {
+        "coordinates": [
+            [
+                [
+                    -13.278048,
+                    8.493532
+                ],
+                [
+                    -13.278254,
+                    8.447241
+                ],
+                [
+                    -13.231762,
+                    8.447033
+                ],
+                [
+                    -13.231551,
+                    8.493323
+                ],
+                [
+                    -13.278048,
+                    8.493532
+                ]
+            ]
+        ],
+        "type": "Polygon"
+    },
+    "id": "sen12floods_s1_labels_0001_2019_01_28",
+    "links": [
+        {
+            "href": "../collection.json",
+            "rel": "collection"
+        },
+        {
+            "href": "../collection.json",
+            "rel": "parent"
+        },
+        {
+            "href": "../../sen12floods_s1_source/sen12floods_s1_source_0001_2019_01_28/stac.json",
+            "rel": "source"
+        }
+    ],
+    "properties": {
+        "FLOODING": "False",
+        "datetime": "2019-01-28T00:00:00+0000",
+        "label:classes": [
+            {
+                "classes": [
+                    "True",
+                    "False"
+                ],
+                "name": "FLOODING"
+            },
+            {
+                "classes": [
+                    "DESCENDING",
+                    "ASCENDING"
+                ],
+                "name": "orbit"
+            }
+        ],
+        "label:description": "Flooding Labels",
+        "label:properties": [
+            "FLOODING",
+            "orbit"
+        ],
+        "label:type": "vector",
+        "orbit": "ASCENDING"
+    },
+    "stac_extensions": [
+        "label"
+    ],
+    "stac_version": "1.0.0-beta.2",
+    "type": "Feature"
+}
