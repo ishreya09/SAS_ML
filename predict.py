@@ -97,7 +97,9 @@ def optimize_pipeline(tf_dataset,
 
 # Sentinel 1 dataset (not using augmentation here)
 
-def model_prediction(image,label):
+
+def model_prediction(image):
+    
     SAR_CNN = tf.keras.models.load_model('CNN_models/SAR_CNN.h5',
                                      custom_objects={'f1_score':f1_score,
                                                      'recall_m':recall_m,
@@ -109,4 +111,6 @@ def model_prediction(image,label):
     prd = int(pred.ravel())
     return pred
 
-    
+image_paths=  ["sen12flood\sen12floods_s1_source\sen12floods_s1_source\sen12floods_s1_source_0_2019_02_18" ]
+img=tf.data.Dataset.from_tensor_slices(image_paths)
+model_prediction(img)
