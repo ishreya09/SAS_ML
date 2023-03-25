@@ -1,0 +1,3 @@
+geometry,label,date,tile_number,id,location_id,image_dir
+"[[[17.034965, -22.505195], [17.035642, -22.55142], [17.085407, -22.550782], [17.084713, -22.504559], [17.034965, -22.505195]]]",0,2019-01-07,7,sen12floods_s2_labels_7_2019_01_07,7,sen12flood/sen12floods_s2_source/sen12floods_s2_source//sen12floods_s2_source_7_2019_01_07
+"[[[17.035642, -22.55142], [17.036322, -22.597644], [17.086103, -22.597005], [17.085407, -22.550782], [17.035642, -22.55142]]]",0,2019-01-07,59,sen12floods_s2_labels_0059_2019_01_07,59,sen12flood/sen12floods_s2_source/sen12floods_s2_source//sen12floods_s2_source_0059_2019_01_07
