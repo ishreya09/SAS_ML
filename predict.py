@@ -179,33 +179,32 @@ def optimize_pipeline(tf_dataset,
 # Sentinel 1 dataset (not using augmentation here)
 
 
+SAR_CNN = tf.keras.models.load_model('CNN_models/SAR_CNN.h5',
+                                     custom_objects={'f1_score': f1_score,
+                                                     'precision_m': precision_m,
+                                                     'recall_m': recall_m})
+
 def model_prediction(image):
     
-    SAR_CNN = tf.keras.models.load_model('CNN_models/SAR_CNN.h5',
-                                     custom_objects={'f1_score':f1_score,
-                                                     'recall_m':recall_m,
-                                                     'precision_m':precision_m
-                                                     }
-                                    )
 
     pred = np.argmax(SAR_CNN.predict(image[tf.newaxis,:,:,:]))
-    prd = int(pred.ravel())
+    # prd = int(pred.ravel())
     return pred
 
 def set_data(s_data):
-    S1_dataset_tr = optimize_pipeline(tf_dataset=get_tf_dataset(image_paths = s_data.image_dir.values,
+    S1_dataset = optimize_pipeline(tf_dataset=get_tf_dataset(image_paths = s_data.image_dir.values,
                                                 labels = s_data.label,
                                                 image_processing_fn = process_image_s1),
                                     
                                     batch_size = 3 * CFG.BATCH_SIZE)
-    return S1_dataset_tr
+    return S1_dataset
 
 data= set_data(pd.read_csv('TimewiseCSV\\2018-12-16_s1.csv'))
 for images,labels in data:
     # print(images.shape)
     # print(labels.shape)
     # print(labels)
-    print("IMG",images)
-    for k in range(len(images)):
-        print("img",images[k])
+    # print("IMG",images)
+    for k in range(4):
+        # print("img",images[k])
         print(model_prediction(images[k]))
