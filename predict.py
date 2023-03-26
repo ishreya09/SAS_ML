@@ -1,6 +1,87 @@
 import tensorflow as tf
 import numpy as np
 import tensorflow.keras.backend as K
+import pandas as pd
+import os
+import rasterio as rio
+import cv2
+
+def load_raster(filepath): # filepath of the raster file to be loaded
+    '''load a single band raster'''
+    with rio.open(filepath) as file: 
+        # the squeeze method is called on the resulting array to remove any singleton dimensions 
+        # (i.e., dimensions with size 1). This is done using the axis=0 argument, 
+        # which tells squeeze to remove any singleton dimensions along the first axis.  
+        raster = file.read().squeeze(axis=0)
+
+        
+    #we aregetting back the 2D image from singleton(1D)
+    return raster
+
+def load_s1_tiffs(folder,
+                  scaling_values=[50.,100.]):
+    images = []
+    i = 0
+    for im in sorted(os.listdir(folder)):
+         
+        if im.rsplit('.',maxsplit=1)[1] == 'tif':
+            
+            path = folder + '/' + im
+            band = load_raster(path)
+            band = band / scaling_values[i]
+            
+            band = cv2.resize(band,
+                              CFG.img_size)
+            
+            images.append(band)
+            i+=1 
+                    
+    return np.dstack(images)
+
+
+def load_s2_tiffs(folder,
+                  scaling_value=10000.):
+    images = []
+    for im in sorted(os.listdir(folder)):
+        if im.rsplit('.',maxsplit=1)[1] == 'tif':    
+            path = folder + '/' + im
+            band = load_raster(path)
+            band = band/ scaling_value
+            
+            band = cv2.resize(band,CFG.img_size)
+            images.append(band)   
+
+    return np.dstack(images)
+                    
+    
+def tf_load_s1(path):    
+    path = path.numpy().decode('utf-8')
+    return load_s1_tiffs(path)
+    
+    
+
+def tf_load_s2(path):    
+    path = path.numpy().decode('utf-8')
+    return load_s2_tiffs(path)
+
+    
+def process_image_s1(filename):
+    '''function for preprocessing in tensorflow data'''
+    
+    return tf.py_function(tf_load_s1, 
+                          [filename], 
+                          tf.float32)
+
+
+
+def process_image_s2(filename):
+    '''function for preprocessing in tensorflow data'''
+    
+    return tf.py_function(tf_load_s2, 
+                          [filename], 
+                          tf.float32)
+
+
 
 def recall_m(y_true, y_pred):
     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
@@ -111,6 +192,20 @@ def model_prediction(image):
     prd = int(pred.ravel())
     return pred
 
-image_paths=  ["sen12flood\sen12floods_s1_source\sen12floods_s1_source\sen12floods_s1_source_0_2019_02_18" ]
-img=tf.data.Dataset.from_tensor_slices(image_paths)
-model_prediction(img)
+def set_data(s_data):
+    S1_dataset_tr = optimize_pipeline(tf_dataset=get_tf_dataset(image_paths = s_data.image_dir.values,
+                                                labels = s_data.label,
+                                                image_processing_fn = process_image_s1),
+                                    
+                                    batch_size = 3 * CFG.BATCH_SIZE)
+    return S1_dataset_tr
+
+data= set_data(pd.read_csv('TimewiseCSV\\2018-12-16_s1.csv'))
+for images,labels in data:
+    # print(images.shape)
+    # print(labels.shape)
+    # print(labels)
+    print("IMG",images)
+    for k in range(len(images)):
+        print("img",images[k])
+        print(model_prediction(images[k]))
