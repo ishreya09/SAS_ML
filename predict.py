@@ -189,6 +189,7 @@ def model_prediction(image):
 
     pred = np.argmax(SAR_CNN.predict(image[tf.newaxis,:,:,:]))
     # prd = int(pred.ravel())
+    print(pred)
     return pred
 
 def set_data(s_data):
