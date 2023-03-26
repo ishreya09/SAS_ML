@@ -205,6 +205,9 @@ for images,labels in data:
     # print(labels.shape)
     # print(labels)
     # print("IMG",images)
-    for k in range(4):
+    for k in range(len(images)):
         # print("img",images[k])
-        print(model_prediction(images[k]))
+        try:
+            print(model_prediction(images[k]))
+        except:
+            pass
